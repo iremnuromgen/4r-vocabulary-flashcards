@@ -103,3 +103,22 @@
 .practice-action-btn:hover {
   transform: translateY(-2px);
 }
+
+.practice-result {
+  text-align: center;
+}
+
+.practice-result__title {
+  font-family: "Fredoka", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #0f1c30;
+}
+
+.practice-result__summary {
+  margin-top: 10px;
+
+  font-family: "Comfortaa", sans-serif;
+  font-size: 13px;
+  color: #8e9eb4;
+}

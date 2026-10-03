@@ -59,17 +59,15 @@ function answerCurrentWord(answer) {
     unknownWords.push(currentWord);
   }
 
-  console.log("known:", knownWords);
-  console.log("unknown:", unknownWords);
+  if (currentWordIndex >= practiceWords.length - 1) {
+    finishPractice();
+    return;
+  }
 
   showNextCard();
 }
 
 function showNextCard() {
-  if (currentWordIndex >= practiceWords.length - 1) {
-    return;
-  }
-
   currentWordIndex++;
 
   showCurrentCard();
@@ -84,6 +82,29 @@ function showCurrentCard() {
   const flashcard = createFlashcard(currentWord);
 
   flashcardArea.appendChild(flashcard);
+}
+
+function finishPractice() {
+  clearFlashcardArea();
+
+  practiceActions.classList.add("is-hidden");
+
+  const result = document.createElement("div");
+  result.classList.add("practice-result");
+
+  const title = document.createElement("h3");
+  title.classList.add("practice-result__title");
+  title.textContent = "Practice complete";
+
+  const summary = document.createElement("p");
+  summary.classList.add("practice-result__summary");
+  summary.textContent =
+    `${knownWords.length} known · ${unknownWords.length} unknown`;
+
+  result.appendChild(title);
+  result.appendChild(summary);
+
+  flashcardArea.appendChild(result);
 }
 
 function shuffleWords(words) {
