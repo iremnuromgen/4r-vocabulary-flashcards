@@ -2,12 +2,14 @@ import { initCreateCollectionModal } from "./modules/modal.js";
 import { initAddWords } from "./modules/words.js";
 import { addCollection } from "./modules/storage.js";
 import { initCollectionsPanel, renderCollections } from "./modules/collections.js";
+import { initPractice, startPractice } from "./modules/practice.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     initCreateCollectionModal();
+    initPractice();
     initCollectionsPanel({
         onSelect: (collection) => {
-            console.log("selected collection:", collection);
+            startPractice(collection);
         },
     });
 

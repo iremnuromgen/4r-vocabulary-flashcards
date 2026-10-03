@@ -1,0 +1,29 @@
+.flashcard-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flashcard {
+  width: 360px;
+  height: 220px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 2px solid rgba(15, 28, 48, 0.08);
+  border-radius: 24px;
+
+  background-color: #ffffff;
+  box-shadow: 0 16px 32px rgba(15, 28, 48, 0.08);
+
+  cursor: pointer;
+}
+
+.flashcard__word {
+  font-family: "Fredoka", sans-serif;
+  font-size: 32px;
+  font-weight: 500;
+  color: #0f1c30;
+}
