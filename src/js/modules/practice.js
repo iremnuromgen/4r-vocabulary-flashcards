@@ -4,11 +4,13 @@ import { updateCollectionProgress } from "./storage.js";
 let practiceEmpty;
 let flashcardArea;
 let practiceActions;
+
 let unknownBtn;
 let knownBtn;
 
 let practiceProgress;
 let practiceProgressTitle;
+
 let allWordsCount;
 let knownWordsCount;
 let unknownWordsCount;
@@ -115,10 +117,13 @@ function startWordSet(words, type) {
   clearFlashcardArea();
 
   if (!words.length) {
+    practiceWords = [];
+    currentWordIndex = 0;
+
     practiceActions.classList.add("is-hidden");
 
-    showEmptyWordSet(type);
     setActivePracticeType(type);
+    showEmptyWordSet(type);
 
     return;
   }
@@ -267,7 +272,9 @@ function shuffleWords(words) {
   const shuffled = [...words];
 
   for (let i = shuffled.length - 1; i > 0; i--) {
-    const randomIndex = Math.floor(Math.random() * (i + 1));
+    const randomIndex = Math.floor(
+      Math.random() * (i + 1)
+    );
 
     [shuffled[i], shuffled[randomIndex]] = [
       shuffled[randomIndex],
