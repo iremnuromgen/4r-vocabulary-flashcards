@@ -52,7 +52,57 @@
             <div class="practice-body">
                 <div class="practice-empty">
                     <h3 class="practice-empty-title">No collection selected</h3>
-                    <p class="practice-empty-subtitle">Select a collection from the left to start practicing.</p>
+                    <p class="practice-empty-subtitle">
+                        Select a collection from the left to start practicing.
+                    </p>
+                </div>
+
+                <div class="practice-progress is-hidden">
+                    <h3 class="practice-progress__title"></h3>
+
+                    <div class="practice-stats">
+                        <button
+                            id="practice-all-btn"
+                            class="practice-stat is-active"
+                            type="button"
+                        >
+                            <span class="practice-stat__label">All Words</span>
+                            <span
+                                id="all-words-count"
+                                class="practice-stat__count"
+                            >
+                                0
+                            </span>
+                        </button>
+
+                        <button
+                            id="practice-known-btn"
+                            class="practice-stat"
+                            type="button"
+                        >
+                            <span class="practice-stat__label">Known</span>
+                            <span
+                                id="known-words-count"
+                                class="practice-stat__count"
+                            >
+                                0
+                            </span>
+                        </button>
+
+                        <button
+                            id="practice-unknown-btn"
+                            class="practice-stat"
+                            type="button"
+                        >
+                            <span class="practice-stat__label">Unknown</span>
+                            <span
+                                id="unknown-words-count"
+                                class="practice-stat__count"
+                            >
+                                0
+                            </span>
+                        </button>
+                    </div>
                 </div>
 
                 <div class="flashcard-area"></div>

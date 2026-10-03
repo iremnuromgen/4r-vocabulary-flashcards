@@ -43,7 +43,7 @@ export function updateCollectionProgress(
     (collection) => collection.id === collectionId
   );
 
-  if (!collection) return;
+  if (!collection) return null;
 
   if (!Array.isArray(collection.knownWords)) {
     collection.knownWords = [];
@@ -82,4 +82,6 @@ export function updateCollectionProgress(
   });
 
   saveCollections(collections);
+
+  return collection;
 }

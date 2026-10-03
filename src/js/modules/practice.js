@@ -7,22 +7,56 @@ let practiceActions;
 let unknownBtn;
 let knownBtn;
 
+let practiceProgress;
+let practiceProgressTitle;
+let allWordsCount;
+let knownWordsCount;
+let unknownWordsCount;
+
+let practiceAllBtn;
+let practiceKnownBtn;
+let practiceUnknownBtn;
+
+let activeCollection = null;
+
 let practiceWords = [];
 let currentWordIndex = 0;
 
 let knownWords = [];
 let unknownWords = [];
 
-let activeCollectionId = null;
-
 export function initPractice() {
   practiceEmpty = document.querySelector(".practice-empty");
   flashcardArea = document.querySelector(".flashcard-area");
   practiceActions = document.querySelector(".practice-actions");
+
   unknownBtn = document.getElementById("unknown-btn");
   knownBtn = document.getElementById("known-btn");
 
-  if (!unknownBtn || !knownBtn) return;
+  practiceProgress = document.querySelector(".practice-progress");
+  practiceProgressTitle = document.querySelector(
+    ".practice-progress__title"
+  );
+
+  allWordsCount = document.getElementById("all-words-count");
+  knownWordsCount = document.getElementById("known-words-count");
+  unknownWordsCount = document.getElementById("unknown-words-count");
+
+  practiceAllBtn = document.getElementById("practice-all-btn");
+  practiceKnownBtn = document.getElementById("practice-known-btn");
+  practiceUnknownBtn = document.getElementById(
+    "practice-unknown-btn"
+  );
+
+  if (
+    !unknownBtn ||
+    !knownBtn ||
+    !practiceAllBtn ||
+    !practiceKnownBtn ||
+    !practiceUnknownBtn
+  ) {
+    return;
+  }
 
   unknownBtn.addEventListener("click", () => {
     answerCurrentWord("unknown");
@@ -31,23 +65,73 @@ export function initPractice() {
   knownBtn.addEventListener("click", () => {
     answerCurrentWord("known");
   });
+
+  practiceAllBtn.addEventListener("click", () => {
+    if (!activeCollection) return;
+
+    startWordSet(activeCollection.words, "all");
+  });
+
+  practiceKnownBtn.addEventListener("click", () => {
+    if (!activeCollection) return;
+
+    const words = Array.isArray(activeCollection.knownWords)
+      ? activeCollection.knownWords
+      : [];
+
+    startWordSet(words, "known");
+  });
+
+  practiceUnknownBtn.addEventListener("click", () => {
+    if (!activeCollection) return;
+
+    const words = Array.isArray(activeCollection.unknownWords)
+      ? activeCollection.unknownWords
+      : [];
+
+    startWordSet(words, "unknown");
+  });
 }
 
 export function startPractice(collection) {
-  if (!practiceEmpty || !flashcardArea || !practiceActions) return;
-  if (!collection.words || collection.words.length === 0) return;
+  if (!practiceEmpty || !flashcardArea || !practiceActions) {
+    return;
+  }
+
+  if (!collection.words || collection.words.length === 0) {
+    return;
+  }
+
+  activeCollection = collection;
+
+  updatePracticeProgress(collection);
 
   practiceEmpty.style.display = "none";
-  practiceActions.classList.remove("is-hidden");
 
-  practiceWords = shuffleWords(collection.words);
+  startWordSet(collection.words, "all");
+}
+
+function startWordSet(words, type) {
+  clearFlashcardArea();
+
+  if (!words.length) {
+    practiceActions.classList.add("is-hidden");
+
+    showEmptyWordSet(type);
+    setActivePracticeType(type);
+
+    return;
+  }
+
+  practiceWords = shuffleWords(words);
   currentWordIndex = 0;
 
   knownWords = [];
   unknownWords = [];
 
-  activeCollectionId = collection.id;
+  practiceActions.classList.remove("is-hidden");
 
+  setActivePracticeType(type);
   showCurrentCard();
 }
 
@@ -89,13 +173,72 @@ function showCurrentCard() {
   flashcardArea.appendChild(flashcard);
 }
 
+function updatePracticeProgress(collection) {
+  if (
+    !practiceProgress ||
+    !practiceProgressTitle ||
+    !allWordsCount ||
+    !knownWordsCount ||
+    !unknownWordsCount
+  ) {
+    return;
+  }
+
+  const collectionKnownWords = Array.isArray(collection.knownWords)
+    ? collection.knownWords
+    : [];
+
+  const collectionUnknownWords = Array.isArray(
+    collection.unknownWords
+  )
+    ? collection.unknownWords
+    : [];
+
+  practiceProgressTitle.textContent = collection.name;
+
+  allWordsCount.textContent = collection.words.length;
+  knownWordsCount.textContent = collectionKnownWords.length;
+  unknownWordsCount.textContent = collectionUnknownWords.length;
+
+  practiceProgress.classList.remove("is-hidden");
+}
+
+function setActivePracticeType(type) {
+  practiceAllBtn.classList.toggle("is-active", type === "all");
+  practiceKnownBtn.classList.toggle("is-active", type === "known");
+  practiceUnknownBtn.classList.toggle(
+    "is-active",
+    type === "unknown"
+  );
+}
+
+function showEmptyWordSet(type) {
+  const message = document.createElement("p");
+  message.classList.add("practice-empty-set");
+
+  if (type === "known") {
+    message.textContent = "No known words yet.";
+  } else if (type === "unknown") {
+    message.textContent = "No unknown words yet.";
+  } else {
+    message.textContent = "No words to practice.";
+  }
+
+  flashcardArea.appendChild(message);
+}
+
 function finishPractice() {
-  if (activeCollectionId) {
-    updateCollectionProgress(
-      activeCollectionId,
+  if (activeCollection) {
+    const updatedCollection = updateCollectionProgress(
+      activeCollection.id,
       knownWords,
       unknownWords
     );
+
+    if (updatedCollection) {
+      activeCollection = updatedCollection;
+      updatePracticeProgress(activeCollection);
+    }
   }
 
   clearFlashcardArea();
