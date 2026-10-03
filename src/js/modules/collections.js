@@ -3,11 +3,14 @@ import { createCollectionItem } from "./components/collectionItem.js";
 
 let listEl;
 let emptyEl;
+let onCollectionSelect;
 
 function clearList() {
   const children = Array.from(listEl.children);
+
   children.forEach((child) => {
     if (emptyEl && child === emptyEl) return;
+
     child.remove();
   });
 }
@@ -21,24 +24,40 @@ export function renderCollections() {
 
   if (collections.length === 0) {
     listEl.classList.add("is-empty");
-    if (emptyEl) emptyEl.style.display = "";
+
+    if (emptyEl) {
+      emptyEl.style.display = "";
+    }
+
     return;
   }
 
   listEl.classList.remove("is-empty");
-  if (emptyEl) emptyEl.style.display = "none";
 
-  collections.forEach((c) => {
-    const row = createCollectionItem(c);
-    listEl.appendChild(row);
+  if (emptyEl) {
+    emptyEl.style.display = "none";
+  }
+
+  collections.forEach((collection) => {
+    const item = createCollectionItem(collection);
+
+    item.addEventListener("click", () => {
+      if (onCollectionSelect) {
+        onCollectionSelect(collection);
+      }
+    });
+
+    listEl.appendChild(item);
   });
 }
 
-export function initCollectionsPanel() {
+export function initCollectionsPanel({ onSelect } = {}) {
   listEl = document.querySelector(".collections-list");
+
   if (!listEl) return;
 
   emptyEl = listEl.querySelector(".empty-state");
+  onCollectionSelect = onSelect;
 
   renderCollections();
 }

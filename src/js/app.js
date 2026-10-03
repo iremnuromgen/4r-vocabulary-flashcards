@@ -5,7 +5,11 @@ import { initCollectionsPanel, renderCollections } from "./modules/collections.j
 
 document.addEventListener("DOMContentLoaded", () => {
     initCreateCollectionModal();
-    initCollectionsPanel();
+    initCollectionsPanel({
+        onSelect: (collection) => {
+            console.log("selected collection:", collection);
+        },
+    });
 
     const wordsDraft = initAddWords();
 
