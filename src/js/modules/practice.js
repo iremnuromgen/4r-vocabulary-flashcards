@@ -9,6 +9,9 @@ let knownBtn;
 let practiceWords = [];
 let currentWordIndex = 0;
 
+let knownWords = [];
+let unknownWords = [];
+
 export function initPractice() {
   practiceEmpty = document.querySelector(".practice-empty");
   flashcardArea = document.querySelector(".flashcard-area");
@@ -18,8 +21,13 @@ export function initPractice() {
 
   if (!unknownBtn || !knownBtn) return;
 
-  unknownBtn.addEventListener("click", showNextCard);
-  knownBtn.addEventListener("click", showNextCard);
+  unknownBtn.addEventListener("click", () => {
+    answerCurrentWord("unknown");
+  });
+
+  knownBtn.addEventListener("click", () => {
+    answerCurrentWord("known");
+  });
 }
 
 export function startPractice(collection) {
@@ -32,12 +40,32 @@ export function startPractice(collection) {
   practiceWords = shuffleWords(collection.words);
   currentWordIndex = 0;
 
+  knownWords = [];
+  unknownWords = [];
+
   showCurrentCard();
 }
 
-function showNextCard() {
+function answerCurrentWord(answer) {
   if (!practiceWords.length) return;
 
+  const currentWord = practiceWords[currentWordIndex];
+
+  if (answer === "known") {
+    knownWords.push(currentWord);
+  }
+
+  if (answer === "unknown") {
+    unknownWords.push(currentWord);
+  }
+
+  console.log("known:", knownWords);
+  console.log("unknown:", unknownWords);
+
+  showNextCard();
+}
+
+function showNextCard() {
   if (currentWordIndex >= practiceWords.length - 1) {
     return;
   }
