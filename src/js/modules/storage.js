@@ -21,6 +21,8 @@ export function addCollection({ name, words }) {
     id: crypto.randomUUID(),
     name,
     words,
+    knownWords: [],
+    unknownWords: [],
     createdAt: new Date().toISOString(),
   };
 
@@ -28,4 +30,56 @@ export function addCollection({ name, words }) {
   saveCollections(collections);
 
   return collection;
+}
+
+export function updateCollectionProgress(
+  collectionId,
+  knownWords,
+  unknownWords
+) {
+  const collections = getCollections();
+
+  const collection = collections.find(
+    (collection) => collection.id === collectionId
+  );
+
+  if (!collection) return;
+
+  if (!Array.isArray(collection.knownWords)) {
+    collection.knownWords = [];
+  }
+
+  if (!Array.isArray(collection.unknownWords)) {
+    collection.unknownWords = [];
+  }
+
+  knownWords.forEach((word) => {
+    collection.unknownWords = collection.unknownWords.filter(
+      (item) => item.id !== word.id
+    );
+
+    const alreadyKnown = collection.knownWords.some(
+      (item) => item.id === word.id
+    );
+
+    if (!alreadyKnown) {
+      collection.knownWords.push(word);
+    }
+  });
+
+  unknownWords.forEach((word) => {
+    collection.knownWords = collection.knownWords.filter(
+      (item) => item.id !== word.id
+    );
+
+    const alreadyUnknown = collection.unknownWords.some(
+      (item) => item.id === word.id
+    );
+
+    if (!alreadyUnknown) {
+      collection.unknownWords.push(word);
+    }
+  });
+
+  saveCollections(collections);
 }

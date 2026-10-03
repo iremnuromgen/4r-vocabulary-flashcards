@@ -1,4 +1,5 @@
 import { createFlashcard } from "./components/flashcard.js";
+import { updateCollectionProgress } from "./storage.js";
 
 let practiceEmpty;
 let flashcardArea;
@@ -11,6 +12,8 @@ let currentWordIndex = 0;
 
 let knownWords = [];
 let unknownWords = [];
+
+let activeCollectionId = null;
 
 export function initPractice() {
   practiceEmpty = document.querySelector(".practice-empty");
@@ -42,6 +45,8 @@ export function startPractice(collection) {
 
   knownWords = [];
   unknownWords = [];
+
+  activeCollectionId = collection.id;
 
   showCurrentCard();
 }
@@ -85,6 +90,14 @@ function showCurrentCard() {
 }
 
 function finishPractice() {
+  if (activeCollectionId) {
+    updateCollectionProgress(
+      activeCollectionId,
+      knownWords,
+      unknownWords
+    );
+  }
+
   clearFlashcardArea();
 
   practiceActions.classList.add("is-hidden");
