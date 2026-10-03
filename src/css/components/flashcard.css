@@ -60,3 +60,46 @@
   font-weight: 500;
   color: #0f1c30;
 }
+
+.practice-actions {
+  margin-top: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.practice-actions.is-hidden {
+  display: none;
+}
+
+.practice-action-btn {
+  min-width: 120px;
+  height: 44px;
+  padding: 0 20px;
+
+  border-radius: 14px;
+  border: 1px solid rgba(15, 28, 48, 0.08);
+
+  font-family: "Comfortaa", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.practice-action-btn--unknown {
+  background-color: #ffffff;
+  color: #0f1c30;
+}
+
+.practice-action-btn--known {
+  background-color: #0f1c30;
+  color: #ffffff;
+}
+
+.practice-action-btn:hover {
+  transform: translateY(-2px);
+}

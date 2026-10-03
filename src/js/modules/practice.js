@@ -2,26 +2,58 @@ import { createFlashcard } from "./components/flashcard.js";
 
 let practiceEmpty;
 let flashcardArea;
+let practiceActions;
+let unknownBtn;
+let knownBtn;
 
 let practiceWords = [];
+let currentWordIndex = 0;
 
 export function initPractice() {
   practiceEmpty = document.querySelector(".practice-empty");
   flashcardArea = document.querySelector(".flashcard-area");
+  practiceActions = document.querySelector(".practice-actions");
+  unknownBtn = document.getElementById("unknown-btn");
+  knownBtn = document.getElementById("known-btn");
+
+  if (!unknownBtn || !knownBtn) return;
+
+  unknownBtn.addEventListener("click", showNextCard);
+  knownBtn.addEventListener("click", showNextCard);
 }
 
 export function startPractice(collection) {
-  if (!practiceEmpty || !flashcardArea) return;
+  if (!practiceEmpty || !flashcardArea || !practiceActions) return;
   if (!collection.words || collection.words.length === 0) return;
 
   practiceEmpty.style.display = "none";
+  practiceActions.classList.remove("is-hidden");
+
+  practiceWords = shuffleWords(collection.words);
+  currentWordIndex = 0;
+
+  showCurrentCard();
+}
+
+function showNextCard() {
+  if (!practiceWords.length) return;
+
+  if (currentWordIndex >= practiceWords.length - 1) {
+    return;
+  }
+
+  currentWordIndex++;
+
+  showCurrentCard();
+}
+
+function showCurrentCard() {
+  if (!practiceWords.length) return;
 
   clearFlashcardArea();
 
-  practiceWords = shuffleWords(collection.words);
-
-  const firstWord = practiceWords[0];
-  const flashcard = createFlashcard(firstWord);
+  const currentWord = practiceWords[currentWordIndex];
+  const flashcard = createFlashcard(currentWord);
 
   flashcardArea.appendChild(flashcard);
 }
