@@ -388,7 +388,8 @@ function showEmptyWordSet(type) {
   } else if (type === "unknown") {
     message.textContent = "No unknown words yet.";
   } else {
-    message.textContent = "No words to practice.";
+    message.textContent =
+      "No remaining words. Reset progress to practice them again.";
   }
 
   flashcardArea.appendChild(message);
