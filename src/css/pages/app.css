@@ -316,6 +316,35 @@ body {
     background-color: rgba(15, 28, 48, 0.12);
     border-radius: 999px;
   }
+
+  .practice-panel {
+    height: 100%;
+    min-height: 0;
+  }
+
+  .practice-body {
+    min-height: 0;
+  }
+
+  .collection-controls-host {
+    top: 0;
+    right: 0;
+  }
+
+  .collection-controls {
+    gap: 6px;
+  }
+
+  .collection-control-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+  }
+
+  .collection-control-btn__icon {
+    width: 16px;
+    height: 16px;
+  }
 }
 
 @media (max-width: 480px) {

@@ -284,3 +284,99 @@
   font-weight: 500;
   color: #3d5e8c;
 }
+
+@media (max-width: 900px) {
+  .practice-progress {
+    margin-top: 52px;
+  }
+
+  .practice-progress__title {
+    max-width: 100%;
+    margin-bottom: 14px;
+
+    font-size: 22px;
+  }
+
+  .practice-stats {
+    width: 100%;
+    gap: 8px;
+  }
+
+  .practice-stat {
+    flex: 1;
+    min-width: 0;
+
+    padding: 10px 6px;
+  }
+
+  .practice-stat__label {
+    font-size: 10px;
+  }
+
+  .practice-stat__count {
+    font-size: 18px;
+  }
+
+  .flashcard-area {
+    width: 100%;
+    min-height: 0;
+
+    padding: 20px 0;
+  }
+
+  .flashcard {
+    width: 100%;
+    max-width: 360px;
+    height: auto;
+
+    aspect-ratio: 18 / 11;
+  }
+
+  .flashcard__word {
+    width: 85%;
+    max-width: 85%;
+
+    font-size: clamp(20px, 7vw, 28px);
+  }
+
+  .practice-actions {
+    width: 100%;
+    height: auto;
+
+    flex-shrink: 0;
+
+    gap: 10px;
+    padding-top: 8px;
+  }
+
+  .practice-action-btn {
+    flex: 1;
+    min-width: 0;
+    max-width: 180px;
+
+    padding: 0 12px;
+  }
+}
+
+@media (max-width: 420px) {
+  .practice-stat {
+    padding: 9px 4px;
+  }
+
+  .practice-stat__label {
+    font-size: 9px;
+  }
+
+  .practice-stat__count {
+    font-size: 17px;
+  }
+
+  .flashcard {
+    max-width: 320px;
+  }
+
+  .practice-action-btn {
+    height: 42px;
+    font-size: 12px;
+  }
+}
