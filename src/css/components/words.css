@@ -1,16 +1,21 @@
 .word-item {
-    display: grid;
-    grid-template-columns: 1fr 1px 1fr auto;
-    align-items: center;
-    gap: 16px;
+  width: 100%;
+  min-width: 0;
 
-    padding: 14px 18px;
-    border-radius: 14px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 1px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px;
 
-    background-color: #FFFFFF;
-    border: 1px solid rgba(15, 28, 48, 0.08);
+  padding: 14px 18px;
+  border-radius: 14px;
 
-    transition: all 0.2s ease;
+  background-color: #ffffff;
+  border: 1px solid rgba(15, 28, 48, 0.08);
+
+  overflow: hidden;
+
+  transition: all 0.2s ease;
 }
 
 .word-item:hover {
@@ -20,10 +25,17 @@
 
 .word-item__from,
 .word-item__to {
-    font-family: 'Comfortaa', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    color: #0F1C30;
+  width: 100%;
+  min-width: 0;
+
+  font-family: "Comfortaa", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #0f1c30;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .word-item__divider {
@@ -71,22 +83,28 @@
 
 /*Edit Mode*/
 .word-item.is-editing {
-  grid-template-columns: 1fr 1px 1fr auto;
+  grid-template-columns: minmax(0, 1fr) 1px minmax(0, 1fr) auto;
 }
 
 .word-item__input {
   width: 100%;
+  min-width: 0;
   height: 34px;
+
   border-radius: 10px;
   border: 1px solid rgba(15, 28, 48, 0.10);
   background: #ffffff;
   padding: 0 12px;
 
-  font-family: 'Comfortaa', sans-serif;
+  font-family: "Comfortaa", sans-serif;
   font-size: 14px;
   font-weight: 500;
-  color: #0F1C30;
+  color: #0f1c30;
+
   outline: none;
+
+  white-space: nowrap;
+  overflow-x: auto;
 }
 
 .word-item__input:focus {
@@ -95,6 +113,7 @@
 
 .word-item__actions {
   display: flex;
+  flex-shrink: 0;
   gap: 10px;
 }
 
