@@ -85,7 +85,9 @@ export function initPractice({ onEdit, onRemove } = {}) {
   practiceAllBtn.addEventListener("click", () => {
     if (!activeCollection) return;
 
-    startWordSet(activeCollection.words, "all");
+    const remainingWords = getRemainingWords(activeCollection);
+
+    startWordSet(remainingWords, "all");
   });
 
   practiceKnownBtn.addEventListener("click", () => {
@@ -138,7 +140,9 @@ export function startPractice(collection) {
 
   practiceEmpty.style.display = "none";
 
-  startWordSet(collection.words, "all");
+  const remainingWords = getRemainingWords(activeCollection);
+
+  startWordSet(remainingWords, "all");
 }
 
 function startWordSet(words, type) {
@@ -264,7 +268,10 @@ async function resetProgress() {
   activeCollection = updatedCollection;
 
   updatePracticeProgress(activeCollection);
-  startWordSet(activeCollection.words, "all");
+
+  const remainingWords = getRemainingWords(activeCollection);
+
+  startWordSet(remainingWords, "all");
 }
 
 function handleEditCollection() {
@@ -319,7 +326,9 @@ function updatePracticeProgress(collection) {
 
   practiceProgressTitle.textContent = collection.name;
 
-  allWordsCount.textContent = collection.words.length;
+  const remainingWords = getRemainingWords(collection);
+
+  allWordsCount.textContent = remainingWords.length;
   knownWordsCount.textContent = collectionKnownWords.length;
   unknownWordsCount.textContent = collectionUnknownWords.length;
 
@@ -423,4 +432,23 @@ function resetPracticeView() {
   practiceEmpty.style.display = "";
 
   setActivePracticeType("all");
+}
+
+function getRemainingWords(collection) {
+  const knownWords = Array.isArray(collection.knownWords)
+    ? collection.knownWords
+    : [];
+
+  const unknownWords = Array.isArray(collection.unknownWords)
+    ? collection.unknownWords
+    : [];
+
+  const answeredWordIds = new Set([
+    ...knownWords.map((word) => word.id),
+    ...unknownWords.map((word) => word.id),
+  ]);
+
+  return collection.words.filter(
+    (word) => !answeredWordIds.has(word.id)
+  );
 }
