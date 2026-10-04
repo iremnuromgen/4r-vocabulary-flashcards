@@ -147,6 +147,27 @@
   border: 1px solid rgba(15, 28, 48, 0.08);
   border-radius: 14px;
   background-color: #ffffff;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.practice-stat:hover {
+  border-color: rgba(15, 28, 48, 0.18);
+  background-color: #f6f8fb;
+}
+
+.practice-stat.is-active {
+  background-color: #eef2f7;
+  border-color: rgba(15, 28, 48, 0.18);
+}
+
+.practice-stat.is-active .practice-stat__label {
+  color: #3d5e8c;
+}
+
+.practice-stat.is-active .practice-stat__count {
+  color: #0f1c30;
 }
 
 .practice-stat__label {
