@@ -42,9 +42,17 @@ export function renderCollections() {
     const item = createCollectionItem(collection);
 
     item.addEventListener("click", () => {
-      if (onCollectionSelect) {
-        onCollectionSelect(collection);
-      }
+      if (!onCollectionSelect) return;
+
+      const collections = getCollections();
+
+      const currentCollection = collections.find(
+        (item) => item.id === collection.id
+      );
+
+      if (!currentCollection) return;
+
+      onCollectionSelect(currentCollection);
     });
 
     listEl.appendChild(item);
