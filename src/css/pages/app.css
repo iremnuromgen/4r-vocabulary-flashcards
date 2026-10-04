@@ -191,3 +191,66 @@ body {
 .collection-controls-host.is-hidden {
   display: none;
 }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .app-header {
+    padding-left: 24px;
+  }
+
+  .app {
+    height: auto;
+    min-height: calc(100vh - 60px);
+
+    flex-direction: column;
+
+    padding: 0 24px 24px;
+    gap: 24px;
+  }
+
+  .collections-panel,
+  .practice-panel {
+    width: 100%;
+  }
+
+  .collections-panel {
+    min-height: 420px;
+  }
+
+  .practice-panel {
+    min-height: 680px;
+  }
+}
+
+@media (max-width: 600px) {
+  .app-header {
+    padding-left: 16px;
+  }
+
+  .app {
+    padding: 0 16px 16px;
+    gap: 16px;
+  }
+
+  .collections-panel,
+  .practice-panel {
+    padding: 24px;
+    border-radius: 20px;
+  }
+
+  .collections-panel {
+    min-height: 380px;
+  }
+
+  .practice-panel {
+    min-height: 620px;
+  }
+
+  .add-collection-btn {
+    right: 24px;
+    bottom: 24px;
+
+    width: 50px;
+    height: 50px;
+  }
+}
