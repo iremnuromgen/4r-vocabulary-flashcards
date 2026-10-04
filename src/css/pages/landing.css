@@ -1,190 +1,277 @@
 body {
-    background-color: #F2F5F9;
+  background-color: #f2f5f9;
 }
 
+/* Header */
 .header {
-    height: 60px;
+  height: 60px;
 
-    display: flex;
-    align-items: center;
-    padding-left: 100px;
+  display: flex;
+  align-items: center;
+
+  padding-left: 100px;
 }
 
-.logo {
-    height: 24px;
+.brand {
+  font-family: "Fredoka", sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1;
+
+  color: #0f1c30;
+  text-decoration: none;
 }
 
+/* Hero */
 .hero {
-    height: calc(100vh - 60px);
+  height: calc(100vh - 60px);
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .hero-content {
-    margin-top: 24px;
+  margin-top: 24px;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .hero-title {
-    max-width: 520px;
-    line-height: 1.1;
-    text-align: center;
-    font-family: 'Fredoka', sans-serif;
-    font-weight: 500;
-    font-size: 40px;
-    color: #0F1C30;
+  max-width: 620px;
+
+  font-family: "Fredoka", sans-serif;
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 1.1;
+
+  color: #0f1c30;
+  text-align: center;
 }
 
 .hero-subtitle {
-    max-width: 620px;
-    line-height: 1.5;
-    text-align: center;
-    font-family: 'Comfortaa', sans-serif;
-    font-size: 16px;
-    color: #3D5E8C;
-    margin-top: 24px;
+  max-width: 620px;
+  margin-top: 24px;
+
+  font-family: "Comfortaa", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+
+  color: #3d5e8c;
+  text-align: center;
 }
 
 .hero-btn {
-    margin-top: 24px;
-    padding: 12px 12px 12px 24px;
+  margin-top: 24px;
+  padding: 12px 12px 12px 24px;
 
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 
-    border: none;
-    border-radius: 24px;
-    cursor: pointer;
+  border: none;
+  border-radius: 24px;
 
-    font-family: 'Comfortaa', sans-serif;
-    font-weight: 600;
-    font-size: 14px;
-    background-color: #0F1C30;
-    color: white;
-    transition: all 0.2s ease;
+  background-color: #0f1c30;
+  color: #ffffff;
+
+  font-family: "Comfortaa", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .hero-btn:hover {
-    background-color: #16253f;
-    transform: translateY(-3px);
+  background-color: #16253f;
+  transform: translateY(-3px);
 }
 
 .hero-btn svg {
-    width: 24px;
-    height: 24px;
-    stroke: currentColor;
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    fill: none;
+  width: 24px;
+  height: 24px;
+
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .hero-visual {
-    margin-bottom: 24px;
-    display: flex;
-    justify-content: center;
-    overflow: hidden;
+  margin-bottom: 24px;
+
+  display: flex;
+  justify-content: center;
+
+  overflow: hidden;
 }
 
 .hero-visual img {
-    max-width: 100%;
-    height: auto;
-    display: block;
+  max-width: 100%;
+  height: auto;
+
+  display: block;
 }
 
+/* 4R Method */
 .how {
-    padding: 0 100px 24px 100px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  padding: 0 100px 48px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .how-header {
-    margin-top: 24px;
-    text-align: center;
+  margin-top: 24px;
+
+  text-align: center;
 }
 
 .how-title {
-    font-family: 'Fredoka', sans-serif;
-    font-size: 32px;
-    font-weight: 500;
-    color: #0F1C30;
+  font-family: "Fredoka", sans-serif;
+  font-size: 32px;
+  font-weight: 500;
+
+  color: #0f1c30;
 }
 
 .how-subtitle {
-    margin-top: 14px;
-    font-family: 'Comfortaa', sans-serif;
-    font-size: 14px;
-    color: #3D5E8C;
+  margin-top: 14px;
+
+  font-family: "Comfortaa", sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+
+  color: #3d5e8c;
 }
 
 .how-features {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 40px;
+  width: 100%;
+  margin-top: 40px;
+
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
 }
 
+/* 4R Cards */
 .feature-card {
-    padding: 24px 24px;
-    border-radius: 24px;
-    text-align: center;
+  position: relative;
+
+  min-width: 0;
+  padding: 32px 24px;
+
+  border: 1px solid rgba(15, 28, 48, 0.06);
+  border-radius: 24px;
+
+  background-color: rgba(255, 255, 255, 0.7);
+
+  text-align: left;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+
+  border-color: rgba(15, 28, 48, 0.1);
+
+  box-shadow: 0 16px 32px rgba(15, 28, 48, 0.08);
+}
+
+.feature-step {
+  width: 52px;
+  height: 52px;
+  margin-bottom: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 16px;
+
+  font-family: "Fredoka", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+
+  color: #0f1c30;
+}
+
+/* Recall */
+.feature-card:nth-child(1) .feature-step {
+  background-color: #dceef8;
+}
+
+/* Reveal */
+.feature-card:nth-child(2) .feature-step {
+  background-color: #f8d4d7;
+}
+
+/* Rate */
+.feature-card:nth-child(3) .feature-step {
+  background-color: #fae9ad;
+}
+
+/* Repeat */
+.feature-card:nth-child(4) .feature-step {
+  background-color: #e2efc7;
 }
 
 .feature-title {
-    font-family: 'Fredoka', sans-serif;
-    font-size: 18px;
-    font-weight: 500;
-    color: #0F1C30;
+  font-family: "Fredoka", sans-serif;
+  font-size: 21px;
+  font-weight: 600;
+
+  color: #0f1c30;
 }
 
 .feature-text {
-    margin-top: 12px;
-    font-family: 'Comfortaa', sans-serif;
-    font-size: 12px;
-    color: #3D5E8C;
+  margin-top: 12px;
+
+  font-family: "Comfortaa", sans-serif;
+  font-size: 13px;
+  line-height: 1.7;
+
+  color: #7d8da3;
 }
 
-.feature-icon {
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.feature-icon img{
-    width: 128px;
-    height: auto;
-    object-fit: contain;
-    display: block;
-}
-
+/* Footer */
 .footer {
   padding: 24px 100px;
-  background-color: #0F1C30;
 
   display: flex;
   flex-direction: column;
   gap: 12px;
+
+  background-color: #0f1c30;
 }
 
 .divider {
-  height: 1px;
   width: 100%;
+  height: 1px;
+
   background-color: rgba(255, 255, 255, 0.15);
 }
 
 .footer-text {
-    font-family: 'Fredoka', sans-serif;
-    font-size: 12px;
-    color: #F2F5F9;
+  font-family: "Fredoka", sans-serif;
+  font-size: 12px;
+
+  color: #f2f5f9;
 }
 
+/* Tablet */
 @media (max-width: 900px) {
   .header {
     padding-left: 32px;
@@ -203,6 +290,7 @@ body {
 
   .hero-title {
     max-width: 600px;
+
     font-size: 36px;
   }
 
@@ -225,12 +313,17 @@ body {
     padding: 48px 32px;
   }
 
+  .how-header {
+    margin-top: 0;
+  }
+
   .how-features {
     width: 100%;
     max-width: 760px;
+    margin-top: 32px;
 
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 24px;
+    gap: 20px;
   }
 
   .footer {
@@ -238,14 +331,16 @@ body {
   }
 }
 
+/* Mobile */
 @media (max-width: 600px) {
   .header {
     height: 56px;
+
     padding-left: 20px;
   }
 
-  .logo {
-    height: 22px;
+  .brand {
+    font-size: 28px;
   }
 
   .hero {
@@ -267,7 +362,6 @@ body {
 
   .hero-subtitle {
     max-width: 100%;
-
     margin-top: 20px;
 
     font-size: 14px;
@@ -276,6 +370,7 @@ body {
 
   .hero-btn {
     margin-top: 24px;
+
     padding: 12px 14px 12px 20px;
   }
 
@@ -292,17 +387,12 @@ body {
     padding: 48px 20px;
   }
 
-  .how-header {
-    margin-top: 0;
-  }
-
   .how-title {
     font-size: 28px;
   }
 
   .how-subtitle {
     max-width: 320px;
-
     margin: 12px auto 0;
 
     font-size: 13px;
@@ -317,23 +407,29 @@ body {
   }
 
   .feature-card {
-    padding: 20px 12px;
+    padding: 24px 20px;
   }
 
-  .feature-icon img {
-    width: 112px;
+  .feature-step {
+    width: 46px;
+    height: 46px;
+    margin-bottom: 18px;
+
+    border-radius: 14px;
+
+    font-size: 16px;
   }
 
   .feature-title {
-    font-size: 17px;
+    font-size: 19px;
   }
 
   .feature-text {
-    max-width: 300px;
+    max-width: none;
+    margin-top: 10px;
 
-    margin: 10px auto 0;
-
-    line-height: 1.5;
+    font-size: 12px;
+    line-height: 1.6;
   }
 
   .footer {
