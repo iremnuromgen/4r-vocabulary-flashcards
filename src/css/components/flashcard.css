@@ -247,3 +247,23 @@
 .collection-control-btn--remove {
   color: #b84b5e;
 }
+
+.practice-result {
+  text-align: center;
+}
+
+.practice-result__title {
+  font-family: "Fredoka", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #0f1c30;
+}
+
+.practice-result__summary {
+  margin-top: 10px;
+
+  font-family: "Comfortaa", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #3d5e8c;
+}
