@@ -184,3 +184,159 @@ body {
     font-size: 12px;
     color: #F2F5F9;
 }
+
+@media (max-width: 900px) {
+  .header {
+    padding-left: 32px;
+  }
+
+  .hero {
+    height: auto;
+    min-height: calc(100dvh - 60px);
+
+    padding: 0 32px 40px;
+  }
+
+  .hero-content {
+    margin-top: 40px;
+  }
+
+  .hero-title {
+    max-width: 600px;
+    font-size: 36px;
+  }
+
+  .hero-subtitle {
+    max-width: 560px;
+  }
+
+  .hero-visual {
+    width: 100%;
+    margin-top: 32px;
+    margin-bottom: 0;
+  }
+
+  .hero-visual img {
+    width: 100%;
+    max-width: 680px;
+  }
+
+  .how {
+    padding: 48px 32px;
+  }
+
+  .how-features {
+    width: 100%;
+    max-width: 760px;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  .footer {
+    padding: 24px 32px;
+  }
+}
+
+@media (max-width: 600px) {
+  .header {
+    height: 56px;
+    padding-left: 20px;
+  }
+
+  .logo {
+    height: 22px;
+  }
+
+  .hero {
+    min-height: calc(100dvh - 56px);
+
+    padding: 0 20px 40px;
+  }
+
+  .hero-content {
+    margin-top: 32px;
+  }
+
+  .hero-title {
+    max-width: 100%;
+
+    font-size: clamp(32px, 10vw, 40px);
+    line-height: 1.05;
+  }
+
+  .hero-subtitle {
+    max-width: 100%;
+
+    margin-top: 20px;
+
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .hero-btn {
+    margin-top: 24px;
+    padding: 12px 14px 12px 20px;
+  }
+
+  .hero-visual {
+    margin-top: 36px;
+  }
+
+  .hero-visual img {
+    width: 100%;
+    max-width: 480px;
+  }
+
+  .how {
+    padding: 48px 20px;
+  }
+
+  .how-header {
+    margin-top: 0;
+  }
+
+  .how-title {
+    font-size: 28px;
+  }
+
+  .how-subtitle {
+    max-width: 320px;
+
+    margin: 12px auto 0;
+
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .how-features {
+    margin-top: 24px;
+
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .feature-card {
+    padding: 20px 12px;
+  }
+
+  .feature-icon img {
+    width: 112px;
+  }
+
+  .feature-title {
+    font-size: 17px;
+  }
+
+  .feature-text {
+    max-width: 300px;
+
+    margin: 10px auto 0;
+
+    line-height: 1.5;
+  }
+
+  .footer {
+    padding: 24px 20px;
+  }
+}
