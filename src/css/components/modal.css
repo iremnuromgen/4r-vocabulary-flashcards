@@ -223,3 +223,72 @@
 .modal-overlay.is-hidden {
     display: none;
 }
+
+@media (max-width: 600px) {
+  .modal-overlay {
+    padding: 16px;
+  }
+
+  .modal {
+    width: 100%;
+    max-height: calc(100dvh - 32px);
+
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+
+    border-radius: 20px;
+  }
+
+  .modal-header {
+    flex-shrink: 0;
+  }
+
+  .modal-title {
+    font-size: 22px;
+  }
+
+  .modal-body {
+    min-height: 0;
+
+    padding: 20px 0;
+
+    overflow-y: auto;
+  }
+
+  .word-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .word-arrow {
+    margin: 0 auto;
+
+    transform: rotate(90deg);
+  }
+
+  .word-field {
+    width: 100%;
+  }
+
+  .word-add {
+    width: 100%;
+    height: 44px;
+
+    border-radius: 12px;
+  }
+
+  .words-area {
+    height: 180px;
+    flex-shrink: 0;
+  }
+
+  .modal-footer {
+    flex-shrink: 0;
+  }
+
+  .modal-footer-btn {
+    flex: 1;
+  }
+}
