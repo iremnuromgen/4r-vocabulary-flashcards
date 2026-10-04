@@ -281,8 +281,12 @@
 
   .words-area {
     height: 180px;
+    min-height: 180px;
     flex-shrink: 0;
-  }
+
+    overflow-y: auto;
+    overflow-x: hidden;
+    }
 
   .modal-footer {
     flex-shrink: 0;
@@ -291,4 +295,13 @@
   .modal-footer-btn {
     flex: 1;
   }
+
+  .words-area::-webkit-scrollbar {
+    width: 5px;
+    }
+
+    .words-area::-webkit-scrollbar-thumb {
+    background-color: rgba(15, 28, 48, 0.12);
+    border-radius: 999px;
+    }
 }

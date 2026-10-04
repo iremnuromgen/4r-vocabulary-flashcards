@@ -1,6 +1,7 @@
 .word-item {
   width: 100%;
   min-width: 0;
+  flex-shrink: 0;
 
   display: grid;
   grid-template-columns: minmax(0, 1fr) 1px minmax(0, 1fr) auto;
