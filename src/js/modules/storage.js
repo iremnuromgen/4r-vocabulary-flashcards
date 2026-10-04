@@ -128,3 +128,40 @@ export function removeCollection(collectionId) {
 
   return true;
 }
+
+export function updateCollection(collectionId, { name, words }) {
+  const collections = getCollections();
+
+  const collection = collections.find(
+    (collection) => collection.id === collectionId
+  );
+
+  if (!collection) return null;
+
+  const knownWords = Array.isArray(collection.knownWords)
+    ? collection.knownWords
+    : [];
+
+  const unknownWords = Array.isArray(collection.unknownWords)
+    ? collection.unknownWords
+    : [];
+
+  const updatedWordsById = new Map(
+    words.map((word) => [word.id, word])
+  );
+
+  collection.name = name;
+  collection.words = words;
+
+  collection.knownWords = knownWords
+    .filter((word) => updatedWordsById.has(word.id))
+    .map((word) => updatedWordsById.get(word.id));
+
+  collection.unknownWords = unknownWords
+    .filter((word) => updatedWordsById.has(word.id))
+    .map((word) => updatedWordsById.get(word.id));
+
+  saveCollections(collections);
+
+  return collection;
+}

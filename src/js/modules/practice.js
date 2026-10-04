@@ -28,6 +28,7 @@ let practiceUnknownBtn;
 let collectionControlsHost;
 let collectionControls;
 
+let onCollectionEdit;
 let onCollectionRemoved;
 
 let activeCollection = null;
@@ -38,7 +39,8 @@ let currentWordIndex = 0;
 let knownWords = [];
 let unknownWords = [];
 
-export function initPractice({ onRemove } = {}) {
+export function initPractice({ onEdit, onRemove } = {}) {
+  onCollectionEdit = onEdit;
   onCollectionRemoved = onRemove;
 
   practiceEmpty = document.querySelector(".practice-empty");
@@ -244,9 +246,9 @@ async function resetProgress() {
 }
 
 function handleEditCollection() {
-  if (!activeCollection) return;
+  if (!activeCollection || !onCollectionEdit) return;
 
-  console.log("edit collection:", activeCollection);
+  onCollectionEdit(activeCollection);
 }
 
 async function handleRemoveCollection() {

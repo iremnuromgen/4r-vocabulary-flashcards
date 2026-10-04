@@ -1,25 +1,44 @@
-export function initCreateCollectionModal() {
-    const openModalBtn = document.getElementById("open-modal-btn");
-    const createCollectionModal = document.getElementById("create-collection-modal");
-    const closeModalBtn = document.getElementById("close-modal-btn");
-    const cancelModalBtn = document.getElementById("cancel-modal-btn");
+export function initCreateCollectionModal({ onClose } = {}) {
+  const openModalBtn = document.getElementById("open-modal-btn");
+  const createCollectionModal = document.getElementById(
+    "create-collection-modal"
+  );
+  const closeModalBtn = document.getElementById("close-modal-btn");
+  const cancelModalBtn = document.getElementById("cancel-modal-btn");
 
-    const openModal = () => createCollectionModal.classList.remove("is-hidden");
-    const closeModal = () => createCollectionModal.classList.add("is-hidden");
+  const openModal = () => {
+    if (!createCollectionModal) return;
 
-    //Open Modal
-    if(openModalBtn) openModalBtn.addEventListener("click", openModal);
-    //Close Model (X Button)
-    if(closeModalBtn) closeModalBtn.addEventListener("click", closeModal);
-    //Close Modal (Cancel Button)
-    if(cancelModalBtn) cancelModalBtn.addEventListener("click", closeModal);
+    createCollectionModal.classList.remove("is-hidden");
+  };
 
-    //Close when clicking outside modal
-    if(createCollectionModal) {
-        createCollectionModal.addEventListener("click", (e) => {
-            if(e.target === createCollectionModal) {
-                closeModal()
-            }
-        });
+  const closeModal = () => {
+    if (!createCollectionModal) return;
+
+    createCollectionModal.classList.add("is-hidden");
+
+    if (onClose) {
+      onClose();
     }
-};
+  };
+
+  if (openModalBtn) {
+    openModalBtn.addEventListener("click", openModal);
+  }
+
+  if (closeModalBtn) {
+    closeModalBtn.addEventListener("click", closeModal);
+  }
+
+  if (cancelModalBtn) {
+    cancelModalBtn.addEventListener("click", closeModal);
+  }
+
+  if (createCollectionModal) {
+    createCollectionModal.addEventListener("click", (event) => {
+      if (event.target === createCollectionModal) {
+        closeModal();
+      }
+    });
+  }
+}
