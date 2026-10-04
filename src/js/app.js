@@ -12,6 +12,7 @@ import {
   initPractice,
   startPractice,
 } from "./modules/practice.js";
+import { initMobileNavigation } from "./modules/mobileNavigation.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const wordsDraft = initAddWords();
@@ -70,6 +71,13 @@ document.addEventListener("DOMContentLoaded", () => {
     onClose: resetModalState,
   });
 
+  const mobileNavigation = initMobileNavigation({
+    onNew: () => {
+      prepareCreateMode();
+      modal.classList.remove("is-hidden");
+    },
+  });
+
   initPractice({
     onEdit: (collection) => {
       openEditMode(collection);
@@ -83,6 +91,8 @@ document.addEventListener("DOMContentLoaded", () => {
   initCollectionsPanel({
     onSelect: (collection) => {
       startPractice(collection);
+
+      mobileNavigation.showPractice();
     },
   });
 

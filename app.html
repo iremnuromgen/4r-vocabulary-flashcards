@@ -43,7 +43,7 @@
             </button>
         </section>
 
-        <section class="practice-panel">
+        <section class="practice-panel is-mobile-active">
             <div class="practice-header">
                 <h2 class="practice-title">Practice</h2>
                 <p class="practice-subtitle">Review your words one by one.</p>
@@ -130,6 +130,32 @@
             </div>
         </section>
     </main>
+
+    <nav class="mobile-nav" aria-label="Mobile navigation">
+        <button
+            id="mobile-practice-btn"
+            class="mobile-nav__btn is-active"
+            type="button"
+        >
+            <span class="mobile-nav__label">Practice</span>
+        </button>
+
+        <button
+            id="mobile-collections-btn"
+            class="mobile-nav__btn"
+            type="button"
+        >
+            <span class="mobile-nav__label">Collections</span>
+        </button>
+
+        <button
+            id="mobile-new-btn"
+            class="mobile-nav__btn mobile-nav__btn--new"
+            type="button"
+        >
+            <span class="mobile-nav__label">New</span>
+        </button>
+    </nav>
 
     <!-- Modal -->
      <div id="create-collection-modal" class="modal-overlay is-hidden">
