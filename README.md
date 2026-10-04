@@ -8,7 +8,7 @@
 
 <div align="center">
 
-# 4R
+# 4R | Vocabulary Flashcards
 
 ### Recall → Reveal → Rate → Repeat
 
