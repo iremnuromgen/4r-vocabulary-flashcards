@@ -1,3 +1,19 @@
+const FLASHCARD_FRONT_THEMES = [
+  "blue",
+  "pink",
+  "green",
+  "yellow",
+  "purple",
+];
+
+function getRandomFrontTheme() {
+  const randomIndex = Math.floor(
+    Math.random() * FLASHCARD_FRONT_THEMES.length
+  );
+
+  return FLASHCARD_FRONT_THEMES[randomIndex];
+}
+
 export function createFlashcard(word) {
   const card = document.createElement("button");
   card.type = "button";
@@ -8,6 +24,10 @@ export function createFlashcard(word) {
 
   const front = createCardFace("flashcard__front", word.from);
   const back = createCardFace("flashcard__back", word.to);
+
+  const frontTheme = getRandomFrontTheme();
+
+  front.classList.add(`flashcard__front--${frontTheme}`);
 
   cardInner.appendChild(front);
   cardInner.appendChild(back);

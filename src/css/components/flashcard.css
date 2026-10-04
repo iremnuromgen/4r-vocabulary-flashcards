@@ -30,6 +30,7 @@
 
   transition: transform 0.5s ease;
   transform-style: preserve-3d;
+  will-change: transform;
 }
 
 .flashcard.is-flipped .flashcard__inner {
@@ -44,18 +45,65 @@
   align-items: center;
   justify-content: center;
 
-  border: 2px solid rgba(15, 28, 48, 0.08);
   border-radius: 24px;
-
-  background-color: #ffffff;
   box-shadow: 0 16px 32px rgba(15, 28, 48, 0.08);
 
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+
+  overflow: hidden;
 }
 
+/* Front face */
+.flashcard__front {
+  transform: rotateY(0deg) translateZ(1px);
+
+  border: 3px solid #16315f;
+  background-color: #ffffff;
+}
+
+.flashcard__front::before {
+  content: "";
+
+  position: absolute;
+  inset: 8px;
+
+  border-radius: 16px;
+  background-color: var(--flashcard-front-color);
+}
+
+.flashcard__front .flashcard__word {
+  position: relative;
+  z-index: 1;
+}
+
+/* Pastel themes */
+.flashcard__front--blue {
+  --flashcard-front-color: #dceef8;
+}
+
+.flashcard__front--pink {
+  --flashcard-front-color: #f8d4d7;
+}
+
+.flashcard__front--green {
+  --flashcard-front-color: #e2efc7;
+}
+
+.flashcard__front--yellow {
+  --flashcard-front-color: #fae9ad;
+}
+
+.flashcard__front--purple {
+  --flashcard-front-color: #eadff6;
+}
+
+/* Back face */
 .flashcard__back {
-  transform: rotateY(180deg);
+  transform: rotateY(180deg) translateZ(1px);
+
+  border: 2px solid rgba(15, 28, 48, 0.08);
+  background-color: #ffffff;
 }
 
 .flashcard__word {
