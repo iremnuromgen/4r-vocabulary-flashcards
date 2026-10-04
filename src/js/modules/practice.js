@@ -172,7 +172,7 @@ function startWordSet(words, type) {
 }
 
 function answerCurrentWord(answer) {
-  if (!practiceWords.length) return;
+  if (!practiceWords.length || !activeCollection) return;
 
   const currentWord = practiceWords[currentWordIndex];
 
@@ -184,12 +184,34 @@ function answerCurrentWord(answer) {
     unknownWords.push(currentWord);
   }
 
+  saveCurrentAnswer(currentWord, answer);
+
   if (currentWordIndex >= practiceWords.length - 1) {
     finishPractice();
     return;
   }
 
   showNextCard();
+}
+
+function saveCurrentAnswer(word, answer) {
+  const answeredKnownWords =
+    answer === "known" ? [word] : [];
+
+  const answeredUnknownWords =
+    answer === "unknown" ? [word] : [];
+
+  const updatedCollection = updateCollectionProgress(
+    activeCollection.id,
+    answeredKnownWords,
+    answeredUnknownWords
+  );
+
+  if (!updatedCollection) return;
+
+  activeCollection = updatedCollection;
+
+  updatePracticeProgress(activeCollection);
 }
 
 function showNextCard() {
@@ -335,19 +357,6 @@ function showEmptyWordSet(type) {
 }
 
 function finishPractice() {
-  if (activeCollection) {
-    const updatedCollection = updateCollectionProgress(
-      activeCollection.id,
-      knownWords,
-      unknownWords
-    );
-
-    if (updatedCollection) {
-      activeCollection = updatedCollection;
-      updatePracticeProgress(activeCollection);
-    }
-  }
-
   clearFlashcardArea();
 
   practiceActions.classList.add("is-hidden");
