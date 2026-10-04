@@ -1,4 +1,4 @@
-const STORAGE_KEY = "flimo.collections";
+const STORAGE_KEY = "4r.collections";
 
 export function getCollections() {
   try {
