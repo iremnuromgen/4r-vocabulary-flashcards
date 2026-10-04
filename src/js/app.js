@@ -6,7 +6,13 @@ import { initPractice, startPractice } from "./modules/practice.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     initCreateCollectionModal();
-    initPractice();
+
+    initPractice({
+        onRemove: () => {
+            renderCollections();
+        },
+    });
+
     initCollectionsPanel({
         onSelect: (collection) => {
             startPractice(collection);

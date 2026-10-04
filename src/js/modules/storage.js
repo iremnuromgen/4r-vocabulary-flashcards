@@ -112,3 +112,19 @@ export function resetCollectionProgress(collectionId, type) {
 
   return collection;
 }
+
+export function removeCollection(collectionId) {
+  const collections = getCollections();
+
+  const updatedCollections = collections.filter(
+    (collection) => collection.id !== collectionId
+  );
+
+  if (updatedCollections.length === collections.length) {
+    return false;
+  }
+
+  saveCollections(updatedCollections);
+
+  return true;
+}

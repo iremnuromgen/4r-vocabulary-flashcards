@@ -4,6 +4,7 @@ import { createCollectionControls } from "./components/collectionControls.js";
 import {
   updateCollectionProgress,
   resetCollectionProgress,
+  removeCollection,
 } from "./storage.js";
 
 let practiceEmpty;
@@ -27,6 +28,8 @@ let practiceUnknownBtn;
 let collectionControlsHost;
 let collectionControls;
 
+let onCollectionRemoved;
+
 let activeCollection = null;
 
 let practiceWords = [];
@@ -35,7 +38,9 @@ let currentWordIndex = 0;
 let knownWords = [];
 let unknownWords = [];
 
-export function initPractice() {
+export function initPractice({ onRemove } = {}) {
+  onCollectionRemoved = onRemove;
+
   practiceEmpty = document.querySelector(".practice-empty");
   flashcardArea = document.querySelector(".flashcard-area");
   practiceActions = document.querySelector(".practice-actions");
@@ -244,10 +249,27 @@ function handleEditCollection() {
   console.log("edit collection:", activeCollection);
 }
 
-function handleRemoveCollection() {
+async function handleRemoveCollection() {
   if (!activeCollection) return;
 
-  console.log("remove collection:", activeCollection);
+  const confirmed = await openConfirm({
+    title: "Remove collection?",
+    message: `"${activeCollection.name}" and all of its words will be permanently removed.`,
+    cancelText: "Remove",
+    continueText: "Cancel",
+  });
+
+  if (!confirmed) return;
+
+  const removed = removeCollection(activeCollection.id);
+
+  if (!removed) return;
+
+  resetPracticeView();
+
+  if (onCollectionRemoved) {
+    onCollectionRemoved();
+  }
 }
 
 function updatePracticeProgress(collection) {
@@ -367,4 +389,27 @@ function clearFlashcardArea() {
   while (flashcardArea.firstChild) {
     flashcardArea.firstChild.remove();
   }
+}
+
+function resetPracticeView() {
+  activeCollection = null;
+
+  practiceWords = [];
+  currentWordIndex = 0;
+
+  knownWords = [];
+  unknownWords = [];
+
+  clearFlashcardArea();
+
+  practiceActions.classList.add("is-hidden");
+  practiceProgress.classList.add("is-hidden");
+
+  if (collectionControlsHost) {
+    collectionControlsHost.classList.add("is-hidden");
+  }
+
+  practiceEmpty.style.display = "";
+
+  setActivePracticeType("all");
 }
