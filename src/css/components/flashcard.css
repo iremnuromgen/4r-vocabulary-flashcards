@@ -169,29 +169,60 @@
   text-align: center;
 }
 
-.practice-reset-btn {
-  display: block;
-
-  margin: 12px auto 0;
-  padding: 6px 10px;
-
-  border: none;
-  background: transparent;
-
-  font-family: "Comfortaa", sans-serif;
-  font-size: 11px;
-  font-weight: 500;
-  color: #8e9eb4;
-
-  cursor: pointer;
-  transition: color 0.2s ease;
+.collection-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.practice-reset-btn:hover {
+.collection-control-btn {
+  width: 38px;
+  height: 38px;
+
+  border-radius: 12px;
+  border: 1px solid rgba(15, 28, 48, 0.08);
+  background: #ffffff;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.collection-control-btn:hover {
+  transform: translateY(-2px);
+  border-color: rgba(15, 28, 48, 0.18);
+  box-shadow: 0 8px 18px rgba(15, 28, 48, 0.08);
+}
+
+.collection-control-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+  transform: none;
+  box-shadow: none;
+}
+
+.collection-control-btn__icon {
+  width: 18px;
+  height: 18px;
+
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.collection-control-btn--reset {
   color: #0f1c30;
 }
 
-.practice-reset-btn:disabled {
-  opacity: 0.4;
-  cursor: default;
+.collection-control-btn--edit {
+  color: #0f1c30;
+}
+
+.collection-control-btn--remove {
+  color: #b84b5e;
 }

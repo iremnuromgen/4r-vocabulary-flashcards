@@ -157,6 +157,7 @@ body {
   margin-top: 8px;
   flex: 1;
 
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -177,5 +178,16 @@ body {
 }
 
 .practice-empty:not([style*="display: none"]) ~ .flashcard-area {
+  display: none;
+}
+
+.collection-controls-host {
+  position: absolute;
+  top: 8px;
+  right: 0;
+  z-index: 10;
+}
+
+.collection-controls-host.is-hidden {
   display: none;
 }

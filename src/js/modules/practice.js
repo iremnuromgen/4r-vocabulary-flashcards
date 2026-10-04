@@ -1,5 +1,6 @@
 import { createFlashcard } from "./components/flashcard.js";
 import { openConfirm } from "./components/confirm.js";
+import { createCollectionControls } from "./components/collectionControls.js";
 import {
   updateCollectionProgress,
   resetCollectionProgress,
@@ -22,7 +23,9 @@ let unknownWordsCount;
 let practiceAllBtn;
 let practiceKnownBtn;
 let practiceUnknownBtn;
-let resetProgressBtn;
+
+let collectionControlsHost;
+let collectionControls;
 
 let activeCollection = null;
 
@@ -36,7 +39,6 @@ export function initPractice() {
   practiceEmpty = document.querySelector(".practice-empty");
   flashcardArea = document.querySelector(".flashcard-area");
   practiceActions = document.querySelector(".practice-actions");
-  resetProgressBtn = document.getElementById("reset-progress-btn");
 
   unknownBtn = document.getElementById("unknown-btn");
   knownBtn = document.getElementById("known-btn");
@@ -52,17 +54,15 @@ export function initPractice() {
 
   practiceAllBtn = document.getElementById("practice-all-btn");
   practiceKnownBtn = document.getElementById("practice-known-btn");
-  practiceUnknownBtn = document.getElementById(
-    "practice-unknown-btn"
-  );
+  practiceUnknownBtn = document.getElementById("practice-unknown-btn");
+  collectionControlsHost = document.getElementById("collection-controls-host");
 
   if (
     !unknownBtn ||
     !knownBtn ||
     !practiceAllBtn ||
     !practiceKnownBtn ||
-    !practiceUnknownBtn ||
-    !resetProgressBtn
+    !practiceUnknownBtn
   ) {
     return;
   }
@@ -101,7 +101,15 @@ export function initPractice() {
     startWordSet(words, "unknown");
   });
 
-  resetProgressBtn.addEventListener("click", resetProgress);
+  if (collectionControlsHost) {
+    collectionControls = createCollectionControls({
+      onReset: resetProgress,
+      onEdit: handleEditCollection,
+      onRemove: handleRemoveCollection,
+    });
+
+    collectionControlsHost.appendChild(collectionControls.element);
+  }
 }
 
 export function startPractice(collection) {
@@ -117,6 +125,10 @@ export function startPractice(collection) {
 
   updatePracticeProgress(collection);
 
+  if (collectionControlsHost) {
+    collectionControlsHost.classList.remove("is-hidden");
+  }
+
   practiceEmpty.style.display = "none";
 
   startWordSet(collection.words, "all");
@@ -128,6 +140,9 @@ function startWordSet(words, type) {
   if (!words.length) {
     practiceWords = [];
     currentWordIndex = 0;
+
+    knownWords = [];
+    unknownWords = [];
 
     practiceActions.classList.add("is-hidden");
 
@@ -223,6 +238,18 @@ async function resetProgress() {
   startWordSet(activeCollection.words, "all");
 }
 
+function handleEditCollection() {
+  if (!activeCollection) return;
+
+  console.log("edit collection:", activeCollection);
+}
+
+function handleRemoveCollection() {
+  if (!activeCollection) return;
+
+  console.log("remove collection:", activeCollection);
+}
+
 function updatePracticeProgress(collection) {
   if (
     !practiceProgress ||
@@ -250,9 +277,11 @@ function updatePracticeProgress(collection) {
   knownWordsCount.textContent = collectionKnownWords.length;
   unknownWordsCount.textContent = collectionUnknownWords.length;
 
-  resetProgressBtn.disabled =
-  collectionKnownWords.length === 0 &&
-  collectionUnknownWords.length === 0;
+  if (collectionControls?.resetBtn) {
+    collectionControls.resetBtn.disabled =
+      collectionKnownWords.length === 0 &&
+      collectionUnknownWords.length === 0;
+  }
 
   practiceProgress.classList.remove("is-hidden");
 }
