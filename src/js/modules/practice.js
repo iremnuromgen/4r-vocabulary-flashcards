@@ -1,5 +1,9 @@
 import { createFlashcard } from "./components/flashcard.js";
-import { updateCollectionProgress } from "./storage.js";
+import { openConfirm } from "./components/confirm.js";
+import {
+  updateCollectionProgress,
+  resetCollectionProgress,
+} from "./storage.js";
 
 let practiceEmpty;
 let flashcardArea;
@@ -18,6 +22,7 @@ let unknownWordsCount;
 let practiceAllBtn;
 let practiceKnownBtn;
 let practiceUnknownBtn;
+let resetProgressBtn;
 
 let activeCollection = null;
 
@@ -31,6 +36,7 @@ export function initPractice() {
   practiceEmpty = document.querySelector(".practice-empty");
   flashcardArea = document.querySelector(".flashcard-area");
   practiceActions = document.querySelector(".practice-actions");
+  resetProgressBtn = document.getElementById("reset-progress-btn");
 
   unknownBtn = document.getElementById("unknown-btn");
   knownBtn = document.getElementById("known-btn");
@@ -55,7 +61,8 @@ export function initPractice() {
     !knownBtn ||
     !practiceAllBtn ||
     !practiceKnownBtn ||
-    !practiceUnknownBtn
+    !practiceUnknownBtn ||
+    !resetProgressBtn
   ) {
     return;
   }
@@ -93,6 +100,8 @@ export function initPractice() {
 
     startWordSet(words, "unknown");
   });
+
+  resetProgressBtn.addEventListener("click", resetProgress);
 }
 
 export function startPractice(collection) {
@@ -178,6 +187,42 @@ function showCurrentCard() {
   flashcardArea.appendChild(flashcard);
 }
 
+async function resetProgress() {
+  if (!activeCollection) return;
+
+  const hasKnownWords =
+    Array.isArray(activeCollection.knownWords) &&
+    activeCollection.knownWords.length > 0;
+
+  const hasUnknownWords =
+    Array.isArray(activeCollection.unknownWords) &&
+    activeCollection.unknownWords.length > 0;
+
+  if (!hasKnownWords && !hasUnknownWords) return;
+
+  const confirmed = await openConfirm({
+    title: "Reset progress?",
+    message:
+      "All known and unknown progress for this collection will be cleared.",
+    cancelText: "Reset",
+    continueText: "Cancel",
+  });
+
+  if (!confirmed) return;
+
+  const updatedCollection = resetCollectionProgress(
+    activeCollection.id,
+    "all"
+  );
+
+  if (!updatedCollection) return;
+
+  activeCollection = updatedCollection;
+
+  updatePracticeProgress(activeCollection);
+  startWordSet(activeCollection.words, "all");
+}
+
 function updatePracticeProgress(collection) {
   if (
     !practiceProgress ||
@@ -204,6 +249,10 @@ function updatePracticeProgress(collection) {
   allWordsCount.textContent = collection.words.length;
   knownWordsCount.textContent = collectionKnownWords.length;
   unknownWordsCount.textContent = collectionUnknownWords.length;
+
+  resetProgressBtn.disabled =
+  collectionKnownWords.length === 0 &&
+  collectionUnknownWords.length === 0;
 
   practiceProgress.classList.remove("is-hidden");
 }

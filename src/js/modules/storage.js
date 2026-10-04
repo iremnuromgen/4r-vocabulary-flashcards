@@ -85,3 +85,30 @@ export function updateCollectionProgress(
 
   return collection;
 }
+
+export function resetCollectionProgress(collectionId, type) {
+  const collections = getCollections();
+
+  const collection = collections.find(
+    (collection) => collection.id === collectionId
+  );
+
+  if (!collection) return null;
+
+  if (type === "known") {
+    collection.knownWords = [];
+  }
+
+  if (type === "unknown") {
+    collection.unknownWords = [];
+  }
+
+  if (type === "all") {
+    collection.knownWords = [];
+    collection.unknownWords = [];
+  }
+
+  saveCollections(collections);
+
+  return collection;
+}
