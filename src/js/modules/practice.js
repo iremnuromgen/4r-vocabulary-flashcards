@@ -39,6 +39,8 @@ let currentWordIndex = 0;
 let knownWords = [];
 let unknownWords = [];
 
+let isAnswerLocked = false;
+
 export function initPractice({ onEdit, onRemove } = {}) {
   onCollectionEdit = onEdit;
   onCollectionRemoved = onRemove;
@@ -148,6 +150,9 @@ export function startPractice(collection) {
 function startWordSet(words, type) {
   clearFlashcardArea();
 
+  isAnswerLocked = false;
+  setAnswerButtonsDisabled(false);
+
   if (!words.length) {
     practiceWords = [];
     currentWordIndex = 0;
@@ -176,7 +181,16 @@ function startWordSet(words, type) {
 }
 
 function answerCurrentWord(answer) {
-  if (!practiceWords.length || !activeCollection) return;
+  if (
+    !practiceWords.length ||
+    !activeCollection ||
+    isAnswerLocked
+  ) {
+    return;
+  }
+
+  isAnswerLocked = true;
+  setAnswerButtonsDisabled(true);
 
   const currentWord = practiceWords[currentWordIndex];
 
@@ -196,6 +210,21 @@ function answerCurrentWord(answer) {
   }
 
   showNextCard();
+
+  setTimeout(() => {
+    isAnswerLocked = false;
+    setAnswerButtonsDisabled(false);
+  }, 300);
+}
+
+function setAnswerButtonsDisabled(disabled) {
+  if (unknownBtn) {
+    unknownBtn.disabled = disabled;
+  }
+
+  if (knownBtn) {
+    knownBtn.disabled = disabled;
+  }
 }
 
 function saveCurrentAnswer(word, answer) {
@@ -366,6 +395,9 @@ function showEmptyWordSet(type) {
 }
 
 function finishPractice() {
+  isAnswerLocked = false;
+  setAnswerButtonsDisabled(false);
+  
   clearFlashcardArea();
 
   practiceActions.classList.add("is-hidden");
