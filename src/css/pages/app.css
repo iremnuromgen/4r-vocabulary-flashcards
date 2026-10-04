@@ -205,6 +205,7 @@ body {
   .app {
     width: 100%;
     height: calc(100dvh - 60px);
+    min-height: 0;
 
     padding: 0 16px 88px;
     gap: 0;
@@ -282,5 +283,54 @@ body {
 
   .mobile-nav__btn--new:hover {
     background-color: #16253f;
+  }
+
+  .collections-panel {
+    height: 100%;
+    min-height: 0;
+  }
+
+  .collections-header {
+    flex-shrink: 0;
+  }
+
+  .collections-list {
+    min-height: 0;
+    margin-top: 12px;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    padding-right: 4px;
+  }
+
+  .collections-list:not(.is-empty) {
+    padding-bottom: 8px;
+  }
+
+  .collections-list::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  .collections-list::-webkit-scrollbar-thumb {
+    background-color: rgba(15, 28, 48, 0.12);
+    border-radius: 999px;
+  }
+}
+
+@media (max-width: 480px) {
+  .collections-panel,
+  .practice-panel {
+    padding: 20px;
+  }
+
+  .collections-title,
+  .practice-title {
+    font-size: 22px;
+  }
+
+  .collections-subtitle,
+  .practice-subtitle {
+    line-height: 1.4;
   }
 }
