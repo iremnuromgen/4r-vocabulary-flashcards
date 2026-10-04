@@ -1,9 +1,9 @@
 body {
-  background: linear-gradient(
-    180deg,
-    #f2f5f9 0%,
-    #e9eff6 100%
-  );
+  background-color: #eef4fb;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 .app-header {

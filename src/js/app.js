@@ -1,3 +1,4 @@
+import { setRandomBackground } from "./modules/randomBackground.js";
 import { initCreateCollectionModal } from "./modules/modal.js";
 import { initAddWords } from "./modules/words.js";
 import {
@@ -15,6 +16,8 @@ import {
 import { initMobileNavigation } from "./modules/mobileNavigation.js";
 
 document.addEventListener("DOMContentLoaded", () => {
+  setRandomBackground();
+  
   const wordsDraft = initAddWords();
 
   const modal = document.getElementById("create-collection-modal");
