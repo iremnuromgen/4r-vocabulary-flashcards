@@ -14,8 +14,14 @@ body {
   padding-left: 48px;
 }
 
-.logo {
-  height: 24px;
+.brand {
+  font-family: "Fredoka", sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1;
+
+  color: #0f1c30;
+  text-decoration: none;
 }
 
 .app {
@@ -219,6 +225,10 @@ body {
     overflow: hidden;
   }
 
+  .brand {
+    font-size: 28px;
+  }
+
   .collections-panel,
   .practice-panel {
     width: 100%;
@@ -363,6 +373,10 @@ body {
 }
 
 @media (max-width: 480px) {
+  .brand {
+    font-size: 26px;
+  }
+
   .collections-panel,
   .practice-panel {
     padding: 20px;
